@@ -4,7 +4,7 @@ var React = _interopRequireWildcard(require("react"));
 
 var _reactDom = require("react-dom");
 
-var _login = _interopRequireDefault(require("./login"));
+var _app = _interopRequireDefault(require("./app"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13,6 +13,4 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // dependencies
 // files
 var root = document.getElementById('root');
-console.log(root);
-console.log("HELLO");
-(0, _reactDom.render)(React.createElement("div", null, React.createElement(_login.default, null), React.createElement("span", null, "Hello world")), root);
+(0, _reactDom.render)(React.createElement(_app.default, null), root);

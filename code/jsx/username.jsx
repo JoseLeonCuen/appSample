@@ -3,6 +3,18 @@ import * as React from 'react';
 
 export default function Username(props){
     return (
-        <input type="text" id="name" minLength="4" required/>
+        <div>
+            {/* <label for="name" className="formLabel">{props.label}</label> */}
+            <input 
+                type="text" 
+                className="formInput" 
+                id="username" 
+                minLength="4" 
+                placeholder={props.label} 
+                value={props.value} 
+                onChange={props.update} 
+                required
+            />
+        </div>        
     )
 }

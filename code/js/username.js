@@ -11,10 +11,14 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 // dependencies
 function Username(props) {
-  return React.createElement("input", {
+  return React.createElement("div", null, React.createElement("input", {
     type: "text",
-    id: "name",
+    className: "formInput",
+    id: "username",
     minLength: "4",
+    placeholder: props.label,
+    value: props.value,
+    onChange: props.update,
     required: true
-  });
+  }));
 }

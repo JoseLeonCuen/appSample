@@ -11,10 +11,29 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 // dependencies
 function Password(props) {
-  return React.createElement("input", {
+  var warning = {
+    must: "The password must:",
+    requirements: ["Be longer than 8 characters", "Contain at least one uppercase letter", "Contain at least one special character"]
+  };
+
+  function requirements(requirements) {
+    return requirements.map(function (req, idx) {
+      return React.createElement("li", {
+        key: idx
+      }, req);
+    });
+  }
+
+  return React.createElement("div", null, React.createElement("input", {
     type: "password",
-    id: "name",
-    minLength: "8",
+    className: "formInput",
+    id: "password",
+    minLength: "9",
+    placeholder: props.label,
+    value: props.value,
+    onChange: props.update,
     required: true
-  });
+  }), props.invalid ? React.createElement("label", {
+    className: "invalidPassword"
+  }, React.createElement("span", null, warning.must), React.createElement("ul", null, requirements(warning.requirements))) : null);
 }

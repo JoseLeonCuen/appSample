@@ -12,6 +12,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // dependencies
 function Header(props) {
   return React.createElement("h1", {
-    className: "topHeader"
+    className: "topHeader blueStyle"
   }, props.text);
 }

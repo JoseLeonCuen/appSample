@@ -1,0 +1,83 @@
+/* Global Rules */
+
+.list{
+    width:80%;
+    margin: 0 10%;
+}
+.listItem{
+    border-bottom: 1px solid rgb(165, 165, 165);
+}
+.itemIcon{
+    display:inline-block;
+    margin:0;
+}
+.itemTitle{
+    display:inline-block;
+}
+.itemDelete{
+    margin:0;
+    color:white;
+    background-color:red;
+    text-align: center;
+    display:inline-block;
+}
+
+/* Mobile rules */
+@media (max-width:1000px) and (max-resolution:200dpi){
+    .list{
+        padding:130px 0;
+    }
+    .listItem{
+        height:120px;        
+    }
+    .itemIcon{
+        width:20%;
+        /* padding:10px; */
+        text-align: center;
+    }
+    .itemTitle{
+        width:50%;
+        font-size: 50px;
+        line-height:120px;
+        margin:0;
+    }
+    .itemDelete{
+        width:20%;
+        float:right;
+        height:100%;
+    }
+    .thrashIcon{
+        padding:20px;
+        display:inline-block;
+    }
+}
+
+/* Desktop rules */
+@media (min-width:1000px) and (min-resolution:72dpi){
+    .list{
+        padding:130px 10%;
+        width:80%
+    }
+    .listItem{
+        height:60px;
+        font-size: 20px;
+    }
+    .itemIcon{
+        width:15%;        
+    }
+    .itemTitle{
+        width:60%;
+        padding:20px;
+        margin:0;
+    }
+    .itemDelete{
+        float:right;
+        width:15%;
+        line-height: 50px;
+        height:100%;
+    }
+    .thrashIcon{
+        padding:20px;
+        display:inline-block;
+    }
+}

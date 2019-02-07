@@ -12,12 +12,17 @@ export default class App extends React.Component{
             login:false
         }
     }
-    login(){
+    login(){        
         this.setState({
             login:true
         })
     }
+    logout(){
+        this.setState({
+            login:false
+        })
+    }
     render(){
-    return (<div>{this.state.login ? <List login={this.login}/> : <Login/> }</div>)
+    return (<div>{this.state.login ? <List logout={(e)=>this.logout()}/> : <Login login={(e)=>this.login()}/> }</div>)
     }
 }

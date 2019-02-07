@@ -1,0 +1,71 @@
+/* Global rules */
+
+.invalidPassword{
+    background-color: rgb(255, 185, 180);
+    border:2px solid rgb(223, 92, 92);
+    /* position: initial; */
+    /* display:block; */
+    /* padding:10px 25%; */
+    border-radius: 10px;
+}
+.passwordRequirements{
+    list-style: none;
+    padding:0;
+    width:100%;
+}
+
+/* Mobile rules */
+@media (max-width:1000px) and (max-resolution:200dpi){
+    form{
+        margin:0 10%;
+        width:80%;
+        padding:140px 0;
+    }
+    .formInput{
+        width:100%;
+        margin:10px 0;
+        padding: 0 2%;
+        height:80px;
+        font-size: 46px;
+        border:0;
+        border-bottom:1px solid gray;
+    }
+    .formLabel{
+        font-size: 32px;   
+    }
+    .loginButton{
+        border:0;
+        width: 70%;
+        margin: 20px 15%;
+    }
+}
+
+/* Desktop rules */
+@media (min-width:1000px) and (min-resolution:72dpi){
+    form{
+        margin:0 10%;
+        width:80%;
+        padding:140px 0;
+    }
+    .formInput{
+        width:50%;
+        margin:10px 25%;
+        height:55px;
+        font-size: 32px;
+        border:0;
+        border-bottom:1px solid gray;
+    }
+    .invalidPassword{       
+        /* position: absolute; */
+        margin:0 15%;
+        padding:10px;
+        width:70%;
+    }
+    .loginButton{
+        border:0;
+        height:40px;
+        font-size: 20px;
+        width: 20%;
+        margin: 20px 40%;
+    }
+}

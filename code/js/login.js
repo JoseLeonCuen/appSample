@@ -56,7 +56,9 @@ function (_React$Component) {
       passLabel: "Password",
       username: "",
       password: "",
+      invalidUsername: false,
       invalidPassword: false,
+      tryToSubmit: false,
       button: "Login"
     };
     return _this;
@@ -67,6 +69,11 @@ function (_React$Component) {
     value: function updateValue(e) {
       var value = e.target.value,
           property = e.target.id;
+
+      if (property == "password") {
+        this.validateForm(e);
+      }
+
       this.setState(function (state) {
         var newState = _objectSpread({}, state);
 
@@ -75,23 +82,28 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "validatePassword",
-    value: function validatePassword(e, login) {
-      console.log("validating password");
-      var pass = this.state.password,
+    key: "validateForm",
+    value: function validateForm(e, login) {
+      console.log("EVENT: ", e);
+      var user = this.state.username,
+          validUsername = /[a-zA-Z]{4,}/.test(user),
+          pass = e.target.value,
           isLongEnough = /.{9,}/,
           hasSpecialChar = /\W/,
           hasUpperCase = /[A-Z]/,
-          invalid = false;
-      invalid = !isLongEnough.test(pass) || !hasSpecialChar.test(pass) || !hasUpperCase.test(pass);
+          tryToSubmit = !!login || this.state.tryToSubmit,
+          invalidPassword = !isLongEnough.test(pass) || !hasSpecialChar.test(pass) || !hasUpperCase.test(pass);
+      console.log(pass);
       this.setState(function (state) {
         return _objectSpread({}, state, {
-          invalidPassword: invalid
+          invalidPassword: invalidPassword,
+          tryToSubmit: tryToSubmit
         });
       });
+      console.log("invalid password: ", invalidPassword);
+      console.log("valid username: ", validUsername);
 
-      if (!invalid) {
-        console.log(this);
+      if (!invalidPassword && validUsername && login) {
         login();
       }
     }
@@ -114,14 +126,12 @@ function (_React$Component) {
         update: function update(e) {
           return _this2.updateValue(e);
         },
-        invalid: this.state.invalidPassword
+        display: this.state.invalidPassword && this.state.tryToSubmit
       }), React.createElement("button", {
         type: "button",
         className: "loginButton blueStyle",
         onClick: function onClick(e) {
-          return _this2.validatePassword(e, function (e) {
-            return _this2.props.login(e);
-          });
+          return _this2.validateForm(e, _this2.props.login);
         }
       }, this.state.button)));
     }

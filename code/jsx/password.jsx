@@ -5,7 +5,7 @@ export default function Password(props){
     var warning={
         must:"The password must:",
         requirements:[
-            "Be longer than 8 characters",
+            "Be at least 9 characters long",
             "Contain at least one uppercase letter",
             "Contain at least one special character"
         ]
@@ -15,7 +15,6 @@ export default function Password(props){
     }
     return (
         <div>
-            {/* <label for="pass" className="formLabel">{props.label}</label> */}
             <input 
                 type="password" 
                 className="formInput" 
@@ -25,10 +24,10 @@ export default function Password(props){
                 onChange={props.update}                
                 required
             />   
-            { props.invalid ? <label className="invalidPassword">
+            { props.display ? <div className="invalidPassword">
                 <span>{warning.must}</span>
-                <ul>{requirements(warning.requirements)}</ul>
-            </label> : null}
+                <ul className="passwordRequirements">{requirements(warning.requirements)}</ul>
+            </div> : null}
         </div>
     )
 }

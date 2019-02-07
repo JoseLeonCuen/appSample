@@ -13,7 +13,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function Password(props) {
   var warning = {
     must: "The password must:",
-    requirements: ["Be longer than 8 characters", "Contain at least one uppercase letter", "Contain at least one special character"]
+    requirements: ["Be at least 9 characters long", "Contain at least one uppercase letter", "Contain at least one special character"]
   };
 
   function requirements(requirements) {
@@ -33,7 +33,9 @@ function Password(props) {
     value: props.value,
     onChange: props.update,
     required: true
-  }), props.invalid ? React.createElement("label", {
+  }), props.display ? React.createElement("div", {
     className: "invalidPassword"
-  }, React.createElement("span", null, warning.must), React.createElement("ul", null, requirements(warning.requirements))) : null);
+  }, React.createElement("span", null, warning.must), React.createElement("ul", {
+    className: "passwordRequirements"
+  }, requirements(warning.requirements))) : null);
 }

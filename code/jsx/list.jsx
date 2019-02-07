@@ -24,28 +24,27 @@ export default class List extends React.Component{
                 { title:'Example 10' }
             ]
         }
+    }    
+    deleteItem(idx){
+        console.log("target: ",idx);
+        this.setState((state)=>{
+            var newState={
+                ...state
+            }
+            newState.items.splice(idx,1);
+            return newState;
+        })
     }
     buildList(items){
-        return items.forEach((item)=>{
-            <ListItem title={item.title} delete={items.delete}/>
-        })
-    }
-    deleteItem(idx){
-        console.log("idx: ",idx);
-        console.log("THIS: ",this);
-        this.setState((state)=>{
-            return{
-                ...state,
-                items:state.items.splice(idx,1)
-            }            
-        })
+        return items.map((item,idx)=> <ListItem key={idx} title={item.title} delete={()=>this.deleteItem(idx)}/> )
     }
     render(){
         return (
-        <div>
-            <BackArrow/>
-            <Header text={this.state.title}/>
-            {buildList(this.state.items)}
+        <div>            
+            <Header text={this.state.title} logout={this.props.logout}/>
+            <div className="list">
+                {this.buildList(this.state.items)}
+            </div>
         </div>
         )
     }

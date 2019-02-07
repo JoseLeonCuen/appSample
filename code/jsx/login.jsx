@@ -15,13 +15,18 @@ export default class Login extends React.Component{
             passLabel:"Password",
             username:"",
             password:"",
-            invalidPassword:false,
+            invalidUsername:false,
+            invalidPassword:false,            
+            tryToSubmit:false,
             button:"Login"
         }
     }
     updateValue(e){
         var value = e.target.value,
             property = e.target.id;
+        if(property=="password"){
+            this.validateForm(e);
+        }
         this.setState((state)=>{
             var newState={
                 ...state
@@ -30,25 +35,30 @@ export default class Login extends React.Component{
             return newState;
         })
     }
-    validatePassword(e,login){
-        console.log("validating password");
-        var pass = this.state.password,
+    validateForm(e,login){
+        console.log("EVENT: ",e);
+        var user = this.state.username,
+            validUsername = /[a-zA-Z]{4,}/.test(user),
+            pass = e.target.value,
             isLongEnough=/.{9,}/,
             hasSpecialChar = /\W/,
             hasUpperCase = /[A-Z]/,
-            invalid=false;
-        invalid = 
-            !isLongEnough.test(pass) || 
-            !hasSpecialChar.test(pass) || 
-            !hasUpperCase.test(pass);
+            tryToSubmit=!!login || this.state.tryToSubmit,            
+            invalidPassword = 
+                !isLongEnough.test(pass) || 
+                !hasSpecialChar.test(pass) || 
+                !hasUpperCase.test(pass);
+                console.log(pass);
         this.setState((state)=>{
                 return {
                     ...state,
-                    invalidPassword:invalid
+                    invalidPassword,
+                    tryToSubmit
                 }                                
         });
-        if(!invalid){
-            console.log(this);
+        console.log("invalid password: ",invalidPassword);
+        console.log("valid username: ",validUsername);        
+        if(!invalidPassword && validUsername && login){
             login();
         }
     }
@@ -58,8 +68,8 @@ export default class Login extends React.Component{
                 <Header text={this.state.title}/>
                 <form>
                     <Username label={this.state.userLabel} value={this.state.username} update={(e)=>this.updateValue(e)}/>
-                    <Password label={this.state.passLabel} value={this.state.password} update={(e)=>this.updateValue(e)} invalid={this.state.invalidPassword}/>
-                    <button type="button" className="loginButton blueStyle" onClick={(e)=>this.validatePassword(e,this.props.login)}>{this.state.button}</button>
+                    <Password label={this.state.passLabel} value={this.state.password} update={(e)=>this.updateValue(e)} display={this.state.invalidPassword && this.state.tryToSubmit}/>
+                    <button type="button" className="loginButton blueStyle" onClick={(e)=>this.validateForm(e,this.props.login)}>{this.state.button}</button>
                 </form>                
             </div>
         )

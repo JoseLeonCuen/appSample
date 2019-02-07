@@ -3,11 +3,11 @@ import * as React from 'react';
 
 export default function GameIcon(props){
     return(
-        <div className="gameIcon">
+        <div>
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                width={props.width} 
-                height={props.height} 
+                width="100%"//{props.width}
+                height="100%"//{props.height}
                 fill={props.fill}
                 viewBox="0 0 24 24"
             >

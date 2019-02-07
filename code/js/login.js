@@ -67,41 +67,38 @@ function (_React$Component) {
   _createClass(Login, [{
     key: "updateValue",
     value: function updateValue(e) {
+      var _this2 = this;
+
       var value = e.target.value,
           property = e.target.id;
-
-      if (property == "password") {
-        this.validateForm(e);
-      }
-
       this.setState(function (state) {
         var newState = _objectSpread({}, state);
 
         newState[property] = value;
         return newState;
+      }, function () {
+        if (property == "password") {
+          _this2.validateForm();
+        }
       });
     }
   }, {
     key: "validateForm",
-    value: function validateForm(e, login) {
-      console.log("EVENT: ", e);
+    value: function validateForm(login) {
       var user = this.state.username,
           validUsername = /[a-zA-Z]{4,}/.test(user),
-          pass = e.target.value,
+          pass = this.state.password,
           isLongEnough = /.{9,}/,
           hasSpecialChar = /\W/,
           hasUpperCase = /[A-Z]/,
           tryToSubmit = !!login || this.state.tryToSubmit,
           invalidPassword = !isLongEnough.test(pass) || !hasSpecialChar.test(pass) || !hasUpperCase.test(pass);
-      console.log(pass);
       this.setState(function (state) {
         return _objectSpread({}, state, {
           invalidPassword: invalidPassword,
           tryToSubmit: tryToSubmit
         });
       });
-      console.log("invalid password: ", invalidPassword);
-      console.log("valid username: ", validUsername);
 
       if (!invalidPassword && validUsername && login) {
         login();
@@ -110,7 +107,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return React.createElement("div", null, React.createElement(_header.default, {
         text: this.state.title
@@ -118,20 +115,20 @@ function (_React$Component) {
         label: this.state.userLabel,
         value: this.state.username,
         update: function update(e) {
-          return _this2.updateValue(e);
+          return _this3.updateValue(e);
         }
       }), React.createElement(_password.default, {
         label: this.state.passLabel,
         value: this.state.password,
         update: function update(e) {
-          return _this2.updateValue(e);
+          return _this3.updateValue(e);
         },
         display: this.state.invalidPassword && this.state.tryToSubmit
       }), React.createElement("button", {
         type: "button",
         className: "loginButton blueStyle",
-        onClick: function onClick(e) {
-          return _this2.validateForm(e, _this2.props.login);
+        onClick: function onClick() {
+          return _this3.validateForm(_this3.props.login);
         }
       }, this.state.button)));
     }

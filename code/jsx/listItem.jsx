@@ -3,7 +3,7 @@ import * as React from 'react';
 
 //files
 import GameIcon from './gameIcon'
-import ThrashIcon from './trashIcon'
+import TrashIcon from './trashIcon'
 
 export default class ListItem extends React.Component{
     constructor(props){
@@ -23,12 +23,14 @@ export default class ListItem extends React.Component{
         return(
             <div className="listItem" onClick={(e)=>this.showHideDelete()}>
                 <div className="itemIcon">
-                <GameIcon width={70} height={70} fill={"orange"}/>                
+                    <GameIcon width={70} height={70} fill={"orange"}/>                
                 </div>
-                <p className="itemTitle">{this.props.title}</p>
+                {/* <div className="itemTitle"> */}
+                    <span className="itemTitle">{this.props.title}</span>
+                {/* </div> */}
                 {this.state.showDelete ? 
                 <div className="itemDelete" onClick={this.props.delete}>
-                    <ThrashIcon width={70} height={70} fill={"white"}/>
+                    <TrashIcon width={40} height={40} fill={"white"}/>
                 </div> : null }
             </div>
         )

@@ -23,23 +23,23 @@ export default class Login extends React.Component{
     }
     updateValue(e){
         var value = e.target.value,
-            property = e.target.id;
-        if(property=="password"){
-            this.validateForm(e);
-        }
+            property = e.target.id;        
         this.setState((state)=>{
             var newState={
                 ...state
             }
             newState[property]=value;
             return newState;
+        },()=>{
+            if(property=="password"){
+                this.validateForm();
+            }
         })
     }
-    validateForm(e,login){
-        console.log("EVENT: ",e);
+    validateForm(login){        
         var user = this.state.username,
             validUsername = /[a-zA-Z]{4,}/.test(user),
-            pass = e.target.value,
+            pass = this.state.password,
             isLongEnough=/.{9,}/,
             hasSpecialChar = /\W/,
             hasUpperCase = /[A-Z]/,
@@ -48,16 +48,13 @@ export default class Login extends React.Component{
                 !isLongEnough.test(pass) || 
                 !hasSpecialChar.test(pass) || 
                 !hasUpperCase.test(pass);
-                console.log(pass);
         this.setState((state)=>{
                 return {
                     ...state,
                     invalidPassword,
                     tryToSubmit
                 }                                
-        });
-        console.log("invalid password: ",invalidPassword);
-        console.log("valid username: ",validUsername);        
+        });        
         if(!invalidPassword && validUsername && login){
             login();
         }
@@ -69,7 +66,7 @@ export default class Login extends React.Component{
                 <form>
                     <Username label={this.state.userLabel} value={this.state.username} update={(e)=>this.updateValue(e)}/>
                     <Password label={this.state.passLabel} value={this.state.password} update={(e)=>this.updateValue(e)} display={this.state.invalidPassword && this.state.tryToSubmit}/>
-                    <button type="button" className="loginButton blueStyle" onClick={(e)=>this.validateForm(e,this.props.login)}>{this.state.button}</button>
+                    <button type="button" className="loginButton blueStyle" onClick={()=>this.validateForm(this.props.login)}>{this.state.button}</button>
                 </form>                
             </div>
         )

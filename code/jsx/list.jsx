@@ -26,7 +26,6 @@ export default class List extends React.Component{
         }
     }    
     deleteItem(idx){
-        console.log("target: ",idx);
         this.setState((state)=>{
             var newState={
                 ...state

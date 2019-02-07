@@ -43,11 +43,14 @@ export default class Login extends React.Component{
             isLongEnough=/.{9,}/,
             hasSpecialChar = /\W/,
             hasUpperCase = /[A-Z]/,
-            tryToSubmit=!!login || this.state.tryToSubmit,            
+            tryToSubmit=!!login || this.state.tryToSubmit, // This is a variable I created to display the error to users only once they click "Login"    
             invalidPassword = 
                 !isLongEnough.test(pass) || 
                 !hasSpecialChar.test(pass) || 
-                !hasUpperCase.test(pass);
+                !hasUpperCase.test(pass);       
+                    // These regex have to be passed in order for the password to be considered valid
+                    // I used the negative value of each so that I can use a || operator to know if
+                    // a single one of them doesn't pass and thus make the password invalid
         this.setState((state)=>{
                 return {
                     ...state,

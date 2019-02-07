@@ -12,17 +12,13 @@ export default class App extends React.Component{
             login:false
         }
     }
-    login(){        
-        this.setState({
-            login:true
-        })
+    log(){  // This will change the log status of the user
+        this.setState((state)=>{
+        return {
+            login:!state.login
+        }})
     }
-    logout(){
-        this.setState({
-            login:false
-        })
-    }
-    render(){
-    return (<div>{this.state.login ? <List logout={(e)=>this.logout()}/> : <Login login={(e)=>this.login()}/> }</div>)
+    render(){   // This displays a different component depending on the log status of the user
+    return (<div>{this.state.login ? <List logout={(e)=>this.log()}/> : <Login login={(e)=>this.log()}/> }</div>)
     }
 }

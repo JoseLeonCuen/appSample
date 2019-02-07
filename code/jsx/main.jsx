@@ -7,5 +7,5 @@ import App from './app';
 
 const root = document.getElementById('root');
 render(
-    <App/>,root
+    <App/>,root // This will only append the root of the app into the DOM
 );

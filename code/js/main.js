@@ -13,4 +13,5 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // dependencies
 // files
 var root = document.getElementById('root');
-(0, _reactDom.render)(React.createElement(_app.default, null), root);
+(0, _reactDom.render)(React.createElement(_app.default, null), root // This will only append the root of the app into the DOM
+);
